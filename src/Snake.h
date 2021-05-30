@@ -33,7 +33,7 @@ class Snake
 			}
 		}
 		
-		for (decltype(snake2.nodes_.size()) i = 1; i < snake1.nodes_.size(); ++i)
+		for (decltype(snake2.nodes_.size()) i = 1; i < snake2.nodes_.size(); ++i)
 		{
 			if (headNode1.getBounds().intersects(snake2.nodes_[i].getBounds()))
 			{
