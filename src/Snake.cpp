@@ -13,10 +13,10 @@ using namespace cppsnake;
 
 const int Snake::InitialSize = 5;
 
-Snake::Snake() : hitSelf_(false)
+Snake::Snake(int index, sf::Color color) : hitSelf_(false), index_(index)
 {
 	direction_ = Direction::Up;
-	initNodes();
+	initNodes(color);
 
 	pickupBuffer_.loadFromFile("Sounds/pickup.aiff");
 	pickupSound_.setBuffer(pickupBuffer_);
@@ -27,26 +27,40 @@ Snake::Snake() : hitSelf_(false)
 	dieSound_.setVolume(50);
 }
 
-void Snake::initNodes()
+void Snake::initNodes(sf::Color color)
 {
 	for (int i = 0; i < Snake::InitialSize; ++i)
 	{
 		nodes_.push_back(SnakeNode(sf::Vector2f(
-			Game::Width / 2 - SnakeNode::Width / 2,
-			Game::Height / 2 - (SnakeNode::Height / 2) + (SnakeNode::Height * i))));
+			Game::Width / 2 - SnakeNode::Width / 2 - (2 * index_ - 1) * 100,
+			Game::Height / 2 - (SnakeNode::Height / 2) + (SnakeNode::Height * i)), color));
 	}
 }
 
 void Snake::handleInput()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		direction_ = Direction::Up;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		direction_ = Direction::Down;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		direction_ = Direction::Left;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		direction_ = Direction::Right;
+	if (index_ == 0)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && direction_ != Direction::Down)
+			direction_ = Direction::Up;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && direction_ != Direction::Up)
+			direction_ = Direction::Down;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && direction_ != Direction::Right)
+			direction_ = Direction::Left;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && direction_ != Direction::Left)
+			direction_ = Direction::Right;
+	}
+	else if (index_ == 1)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && direction_ != Direction::Down)
+			direction_ = Direction::Up;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && direction_ != Direction::Up)
+			direction_ = Direction::Down;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && direction_ != Direction::Right)
+			direction_ = Direction::Left;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && direction_ != Direction::Left)
+			direction_ = Direction::Right;
+	}
 }
 
 void Snake::update(sf::Time delta)
@@ -80,19 +94,19 @@ void Snake::grow()
 	{
 	case Direction::Up:
 		nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x,
-			nodes_[nodes_.size() - 1].getPosition().y + SnakeNode::Height)));
+			nodes_[nodes_.size() - 1].getPosition().y + SnakeNode::Height), nodes_.begin()->getColor()));
 		break;
 	case Direction::Down:
 		nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x,
-			nodes_[nodes_.size() - 1].getPosition().y - SnakeNode::Height)));
+			nodes_[nodes_.size() - 1].getPosition().y - SnakeNode::Height), nodes_.begin()->getColor()));
 		break;
 	case Direction::Left:
 		nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x + SnakeNode::Width,
-			nodes_[nodes_.size() - 1].getPosition().y)));
+			nodes_[nodes_.size() - 1].getPosition().y), nodes_.begin()->getColor()));
 		break;
 	case Direction::Right:
 		nodes_.push_back(SnakeNode(sf::Vector2f(nodes_[nodes_.size() - 1].getPosition().x - SnakeNode::Width,
-			nodes_[nodes_.size() - 1].getPosition().y)));
+			nodes_[nodes_.size() - 1].getPosition().y), nodes_.begin()->getColor()));
 		break;
 	}
 }

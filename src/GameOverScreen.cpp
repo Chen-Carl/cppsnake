@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "Game.h"
 #include "GameScreen.h"
@@ -9,13 +10,14 @@
 
 using namespace cppsnake;
 
-GameOverScreen::GameOverScreen(std::size_t score) : score_(score)
+GameOverScreen::GameOverScreen(int winner, std::size_t score) : score_(score)
 {
 	font_.loadFromFile("Fonts/game_over.ttf");
 	text_.setFont(font_);
-	text_.setString("Your score: " + std::to_string(score) + "!"
-															 "\n\nPress [SPACE] to retry"
-															 "\n\nPress [ESC] to quit");
+	text_.setString("Winner: " + std::to_string(winner) + ""
+	  "\n\nYour score: " + std::to_string(score) + "!"
+	  "\n\nPress [SPACE] to retry"
+	  "\n\nPress [ESC] to quit");
 	text_.setFillColor(sf::Color::Red);
 
 	sf::FloatRect textBounds = text_.getLocalBounds();

@@ -10,7 +10,7 @@ namespace cppsnake
 	class GameOverScreen : public Screen
 	{
 	public:
-		GameOverScreen(std::size_t score);
+		GameOverScreen(int winner, std::size_t score);
 
 		void handleInput(sf::RenderWindow &window) override;
 		void update(sf::Time delta) override;

@@ -21,7 +21,9 @@ namespace cppsnake
 		void generateFruit();
 
 	private:
-		Snake snake_;
+		Snake snake_1 = Snake(1, sf::Color::Green);
+		Snake snake_0 = Snake(0, sf::Color::Blue);
+		int maxFruitSize = 5;
 		std::vector<Fruit> fruit_;
 	};
 }

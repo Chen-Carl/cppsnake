@@ -22,8 +22,8 @@ namespace cppsnake
 		void update(sf::Time delta);
 		void render();
 
-		static const int Width = 640;
-		static const int Height = 480;
+		static const int Width = 1024;
+		static const int Height = 768;
 
 		static std::shared_ptr<Screen> Screen;
 
