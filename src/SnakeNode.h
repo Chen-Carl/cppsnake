@@ -2,6 +2,7 @@
 #define SNAKE_NODE_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 namespace cppsnake
 {

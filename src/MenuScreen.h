@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Screen.h"
+#include "DifficultyScreen.h"
 
 namespace cppsnake
 {

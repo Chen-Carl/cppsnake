@@ -8,6 +8,7 @@
 
 #include "SnakeNode.h"
 #include "Fruit.h"
+#include "Barrier.h"
 
 namespace cppsnake
 {
@@ -51,6 +52,7 @@ public:
 	void update(sf::Time delta);
 	void render(sf::RenderWindow& window);
 
+	void checkBarrierCollisions(Barrier& barrier);
 	void checkFruitCollisions(std::vector<Fruit>& fruits);
 
 	bool hitSelf() const;
@@ -60,8 +62,10 @@ public:
 private:
 	void move();
 	void grow();
+	void shrink();
 	void checkEdgeCollisions();
 	void checkSelfCollisions();
+
 	void initNodes(sf::Color color = sf::Color::Green);
 
 	bool hitSelf_;

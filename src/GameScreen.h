@@ -8,13 +8,14 @@
 #include "Screen.h"
 #include "Snake.h"
 #include "Fruit.h"
+#include "Barrier.h"
 
 namespace cppsnake
 {
 	class GameScreen : public Screen
 	{
 	public:
-		GameScreen();
+		GameScreen(int level = 1);
 
 		void handleInput(sf::RenderWindow &window) override;
 		void update(sf::Time delta) override;
@@ -26,6 +27,7 @@ namespace cppsnake
 	private:
 		Snake snake_1 = Snake(1, sf::Color::Green);
 		Snake snake_0 = Snake(0, sf::Color::Blue);
+		Barrier barrier_;
 		int maxFruitSize = 5;
 		std::vector<Fruit> fruit_;
 		std::mutex mutex_;

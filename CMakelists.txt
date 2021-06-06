@@ -32,6 +32,9 @@ set(LIB_SRC
     src/Screen.cpp
     src/Snake.cpp
     src/SnakeNode.cpp
+    src/Barrier.cpp
+    src/Brick.cpp
+    src/DifficultyScreen.cpp
 )
 
 add_library(snake ${LIB_SRC})

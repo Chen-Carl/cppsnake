@@ -83,8 +83,40 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
 	if (toRemove != fruits.end())
 	{
 		pickupSound_.play();
-		grow();
 		fruits.erase(toRemove);
+
+		sf::Color color = toRemove->getFruitColor();
+		if (color == sf::Color::White || color == sf::Color::Yellow)
+		{
+			grow();
+		}
+		else if (color == sf::Color::Blue)
+		{
+			grow();
+			grow();
+		}
+		else if (color == sf::Color::Red)
+		{
+			shrink();
+		}
+		// else
+		// {
+		// 	grow();
+		// }
+	}
+}
+
+void Snake::checkBarrierCollisions(Barrier& barrier)
+{
+	SnakeNode& headNode = nodes_[0];
+	for (decltype(barrier.getBricks().size()) i = 0; i < barrier.getBricks().size(); ++i)
+	{
+		if (headNode.getBounds().intersects(barrier.getBricks()[i].getBounds()))
+		{
+			dieSound_.play();
+			sf::sleep(sf::seconds(dieBuffer_.getDuration().asSeconds()));
+			hitSelf_ = true;
+		}
 	}
 }
 
@@ -109,6 +141,12 @@ void Snake::grow()
 			nodes_[nodes_.size() - 1].getPosition().y), nodes_.begin()->getColor()));
 		break;
 	}
+}
+
+void Snake::shrink()
+{
+	if (nodes_.size() > 1)
+		nodes_.pop_back();
 }
 
 unsigned Snake::getSize() const

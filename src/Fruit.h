@@ -13,9 +13,11 @@ namespace cppsnake
 		void render(sf::RenderWindow &window);
 
 		sf::FloatRect getBounds() const;
+		sf::Color getFruitColor() const;
 
 	private:
 		sf::CircleShape shape_;
+		sf::Color color_;
 
 		static const float Radius;
 	};
