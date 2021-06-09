@@ -2,8 +2,12 @@
 #define DIFFICULTYSCREEN_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <memory>
 
+#include <vector>
 #include "Screen.h"
+#include "Button.h"
 
 namespace cppsnake
 {
@@ -12,12 +16,12 @@ namespace cppsnake
 	public:
 		DifficultyScreen();
 
-		void handleInput(sf::RenderWindow& window)override;
+		void handleInput(sf::Event &e, sf::RenderWindow &window) override;
 		void update(sf::Time delta) override;
 		void render(sf::RenderWindow& window) override;
 	private:
-		sf::Font font_;
-		sf::Text text_;
+		std::vector<Key::key_ptr> btns;
 	};
 }
-#endif // !DIFFICULTYSCREEN_H
+
+#endif

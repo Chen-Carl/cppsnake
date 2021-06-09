@@ -33,7 +33,7 @@ MenuScreen::MenuScreen()
 	snakeText_.setPosition(Game::Width / 2 + 150, Game::Height / 4);
 }
 
-void MenuScreen::handleInput(sf::RenderWindow &window)
+void MenuScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		// Game::Screen = std::make_shared<GameScreen>();

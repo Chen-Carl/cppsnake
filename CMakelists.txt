@@ -35,6 +35,7 @@ set(LIB_SRC
     src/Barrier.cpp
     src/Brick.cpp
     src/DifficultyScreen.cpp
+    src/Button.cpp
 )
 
 add_library(snake ${LIB_SRC})

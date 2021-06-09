@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 #include "Screen.h"
 
@@ -17,7 +18,7 @@ namespace cppsnake
 		Game();
 
 		void run();
-
+		void setBackground(const std::string &file);
 		void handleInput();
 		void update(sf::Time delta);
 		void render();
@@ -30,6 +31,7 @@ namespace cppsnake
 	private:
 		sf::RenderWindow window_;
 		sf::Music bgMusic_;
+		// bool isLineOn = false;
 
 		static const sf::Time TimePerFrame;
 	};

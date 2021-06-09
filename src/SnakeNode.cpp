@@ -4,8 +4,8 @@
 
 using namespace cppsnake;
 
-const float SnakeNode::Width = 12.f;
-const float SnakeNode::Height = 12.f;
+const float SnakeNode::Width = 15.f;
+const float SnakeNode::Height = 15.f;
 
 SnakeNode::SnakeNode(sf::Vector2f position, sf::Color color)
 : position_(position), color_(color)
@@ -13,8 +13,8 @@ SnakeNode::SnakeNode(sf::Vector2f position, sf::Color color)
 	shape_.setPosition(position_);
 	// shape_.setFillColor(color_);
 	shape_.setSize(sf::Vector2f(SnakeNode::Width, SnakeNode::Height));
-	shape_.setOutlineColor(sf::Color::White);
-	shape_.setOutlineThickness(-0.5f);
+	// shape_.setOutlineColor(sf::Color::White);
+	// shape_.setOutlineThickness(-0.5f);
 
 	sf::Texture *texture = new sf::Texture();
 	if (color_ == sf::Color::Blue)

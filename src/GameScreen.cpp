@@ -27,7 +27,7 @@ GameScreen::GameScreen(int level) : barrier_(level, sf::Color(128, 0, 128))
 	generateFruits.detach();
 }
 
-void GameScreen::handleInput(sf::RenderWindow &window)
+void GameScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	snake_1.handleInput();
 	snake_0.handleInput();

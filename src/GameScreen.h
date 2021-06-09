@@ -17,7 +17,7 @@ namespace cppsnake
 	public:
 		GameScreen(int level = 1);
 
-		void handleInput(sf::RenderWindow &window) override;
+		void handleInput(sf::Event &e, sf::RenderWindow &window) override;
 		void update(sf::Time delta) override;
 		void render(sf::RenderWindow &window) override;
 

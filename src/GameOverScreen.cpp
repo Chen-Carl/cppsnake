@@ -37,7 +37,7 @@ GameOverScreen::GameOverScreen(int winner, std::size_t score) : score_(score)
 	text_.setPosition(Game::Width / 2 + 150, Game::Height / 2);
 }
 
-void GameOverScreen::handleInput(sf::RenderWindow &window)
+void GameOverScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		Game::Screen = std::make_shared<DifficultyScreen>();
