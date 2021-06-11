@@ -40,7 +40,7 @@ GameOverScreen::GameOverScreen(int winner, std::size_t score) : score_(score)
 void GameOverScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		Game::Screen = std::make_shared<DifficultyScreen>();
+		Game::screen = std::make_shared<DifficultyScreen>();
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		window.close();
 }

@@ -9,7 +9,7 @@ using namespace cppsnake;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 25.f);
 
-std::shared_ptr<Screen> Game::Screen = std::make_shared<MenuScreen>();
+std::shared_ptr<Screen> Game::screen = std::make_shared<MenuScreen>();
 
 Game::Game()
 	: window_(sf::VideoMode(Game::Width + 300, Game::Height), "sfSnake")
@@ -28,12 +28,12 @@ void Game::handleInput()
 		if (event.type == sf::Event::Closed)
 			window_.close();
 	}
-	Game::Screen->handleInput(event, window_);
+	Game::screen->handleInput(event, window_);
 }
 
 void Game::update(sf::Time delta)
 {
-	Game::Screen->update(delta);
+	Game::screen->update(delta);
 }
 
 void Game::setBackground(const std::string &file)
@@ -60,7 +60,7 @@ void Game::render()
 {
 	window_.clear();
 	setBackground("./images/background.jpg");
-	Game::Screen->render(window_);
+	Game::screen->render(window_);
 	window_.display();
 }
 

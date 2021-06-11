@@ -28,7 +28,7 @@ void DifficultyScreen::handleInput(sf::Event &e, sf::RenderWindow& window)
 		}
 	}
 	if (clicked != 0)
-		Game::Screen = std::make_shared<GameScreen>(clicked);
+		Game::screen = std::make_shared<GameScreen>(clicked);
 }
 
 void DifficultyScreen::update(sf::Time delta)

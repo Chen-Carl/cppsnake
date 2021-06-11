@@ -23,7 +23,7 @@ GameScreen::GameScreen(int level) : barrier_(level, sf::Color(128, 0, 128))
 	snake_0 = Snake(0, sf::Color::Green);
 	barrier_ = Barrier(level, sf::Color(128, 0, 128));
 	engine.seed(std::time(NULL));
-	std::thread generateFruits(&checkFruitSize, this);
+	std::thread generateFruits(&GameScreen::checkFruitSize, this);
 	generateFruits.detach();
 }
 
@@ -53,9 +53,9 @@ void GameScreen::update(sf::Time delta)
 	checkMutualCollisions(snake_0, snake_1);
 
 	if (snake_1.hitSelf())
-		Game::Screen = std::make_shared<GameOverScreen>(0, snake_0.getSize());
+		Game::screen = std::make_shared<GameOverScreen>(0, snake_0.getSize());
 	if (snake_0.hitSelf())
-		Game::Screen = std::make_shared<GameOverScreen>(1, snake_1.getSize());
+		Game::screen = std::make_shared<GameOverScreen>(1, snake_1.getSize());
 }
 
 void GameScreen::render(sf::RenderWindow &window)

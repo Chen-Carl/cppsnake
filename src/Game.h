@@ -26,7 +26,7 @@ namespace cppsnake
 		static const int Width = 1024;
 		static const int Height = 768;
 
-		static std::shared_ptr<Screen> Screen;
+		static std::shared_ptr<Screen> screen;
 
 	private:
 		sf::RenderWindow window_;
