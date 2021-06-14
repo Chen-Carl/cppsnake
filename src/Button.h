@@ -13,9 +13,10 @@ class Button
 private:
     sf::Texture img;
     sf::Sprite sprite;
+    std::string path;
 
 public:
-    Button(double x = 0, double y = 0, double xscale = 1, double yscale = 1);
+    Button(double x = 0, double y = 0, double xscale = 1, double yscale = 1, int index = 0);
 
     bool isActive;
     bool PreBehRel;
@@ -26,6 +27,7 @@ public:
     void deactive();
     bool onClick(sf::Event &e, sf::RenderWindow &window);
     void render(sf::RenderWindow &);
+    void setFillColor(sf::Color color);
 };
 
 class Key : public Button
@@ -38,7 +40,7 @@ private:
     sf::Text text;
 
 public:
-    Key(char ch = 'A', double x = 0, double y = 0);
+    Key(char ch = 'A', double x = 0, double y = 0, int index = 0);
 
     void render(sf::RenderWindow &window);
 };

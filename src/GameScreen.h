@@ -31,6 +31,10 @@ namespace cppsnake
 		int maxFruitSize = 5;
 		std::vector<Fruit> fruit_;
 		std::mutex mutex_;
+		sf::Texture img_;
+    	sf::Sprite sprite_;
+		sf::RectangleShape line_;
+		// zcserver::RWMutex s_mutex;
 	};
 }
 

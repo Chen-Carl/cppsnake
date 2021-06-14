@@ -9,6 +9,7 @@
 #include "SnakeNode.h"
 #include "Fruit.h"
 #include "Barrier.h"
+#include "zclog.h"
 
 namespace cppsnake
 {
@@ -28,6 +29,7 @@ class Snake
 		{
 			if (headNode2.getBounds().intersects(snake1.nodes_[i].getBounds()))
 			{
+				ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Mutual Collisions, snake 1 loses";
 				snake2.dieSound_.play();
 				sf::sleep(sf::seconds(snake2.dieBuffer_.getDuration().asSeconds()));
 				snake2.hitSelf_ = true;
@@ -38,6 +40,7 @@ class Snake
 		{
 			if (headNode1.getBounds().intersects(snake2.nodes_[i].getBounds()))
 			{
+				ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Mutual Collisions, snake 2 loses";
 				snake1.dieSound_.play();
 				sf::sleep(sf::seconds(snake1.dieBuffer_.getDuration().asSeconds()));
 				snake1.hitSelf_ = true;

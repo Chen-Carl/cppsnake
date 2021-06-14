@@ -9,6 +9,7 @@
 #include <string>
 
 #include "Screen.h"
+#include "zclog.h"
 
 namespace cppsnake
 {

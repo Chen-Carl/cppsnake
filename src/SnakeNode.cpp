@@ -19,11 +19,11 @@ SnakeNode::SnakeNode(sf::Vector2f position, sf::Color color)
 	sf::Texture *texture = new sf::Texture();
 	if (color_ == sf::Color::Blue)
 	{
-		texture->loadFromFile("./images/snakeNodeBlue.jpg");
+		texture->loadFromFile("/home/zoecarl/snake/images/snakeNodeBlue.jpg");
 	}
 	else if (color_ == sf::Color::Green)
 	{
-		texture->loadFromFile("./images/snakeNodeGreen.jpg");
+		texture->loadFromFile("/home/zoecarl/snake/images/snakeNodeGreen.jpg");
 	}
 	texture->setSmooth(true);
 	shape_.setTexture(texture);

@@ -18,27 +18,27 @@ Fruit::Fruit(sf::Vector2f position)
 	int N = 1 + rand() % 8;
 	if (N == 1)
 	{
-		texture->loadFromFile("./images/apple.png");
+		texture->loadFromFile("/home/zoecarl/snake/images/apple.png");
 		color_ = sf::Color::White;
 	}
 	else if (N == 2)
 	{
-		texture->loadFromFile("./images/avocado.png");
+		texture->loadFromFile("/home/zoecarl/snake/images/avocado.png");
 		color_ = sf::Color::Yellow;
 	}
 	else if (N == 3 || N == 4)
 	{
-		texture->loadFromFile("./images/grapes.png");
+		texture->loadFromFile("/home/zoecarl/snake/images/grapes.png");
 		color_ = sf::Color::Blue;
 	}
 	else if (N == 5 || N == 6)
 	{
-		texture->loadFromFile("./images/orange.png");
+		texture->loadFromFile("/home/zoecarl/snake/images/orange.png");
 		color_ = sf::Color::Red;
 	}
 	else if (N == 7 || N == 8)
 	{
-		texture->loadFromFile("./images/watermelon.png");
+		texture->loadFromFile("/home/zoecarl/snake/images/watermelon.png");
 		color_ = sf::Color::White;
 	}
 	shape_.setTexture(texture);

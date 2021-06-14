@@ -8,6 +8,7 @@
 #include <vector>
 #include "Screen.h"
 #include "Button.h"
+#include "zclog.h"
 
 namespace cppsnake
 {

@@ -1,0 +1,15 @@
+logs:
+  - name: root
+    level: info
+    formatter: "%d%T%m%n"
+    appender:
+      - type: FileLogAppender
+        path: log/log.txt
+      - type: StdoutLogAppender
+  - name: snake
+    level: info
+    formatter: "%d%T%m%m"
+    appender:
+      - type: FileLogAppender
+        path: log/system.txt
+      - type: StdoutLogAppender

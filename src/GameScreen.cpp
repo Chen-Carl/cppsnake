@@ -10,6 +10,7 @@
 #include "GameScreen.h"
 #include "GameOverScreen.h"
 #include "Game.h"
+#include "zclog.h"
 
 using namespace cppsnake;
 
@@ -21,8 +22,20 @@ GameScreen::GameScreen(int level) : barrier_(level, sf::Color(128, 0, 128))
 {
 	snake_1 = Snake(1, sf::Color::Blue);
 	snake_0 = Snake(0, sf::Color::Green);
+
+	img_.loadFromFile("/home/zoecarl/snake/images/fruitfunction.png");
+    sprite_.setTexture(img_);
+	sprite_.setScale(0.5, 0.5);
+	sprite_.setPosition(sf::Vector2f(1024 + 20, 20));
+	line_ = sf::RectangleShape(sf::Vector2f(2, Game::Height - 40));
+	line_.setFillColor(sf::Color::White);
+	line_.setPosition(sf::Vector2f(1024, 20));
+	
 	barrier_ = Barrier(level, sf::Color(128, 0, 128));
 	engine.seed(std::time(NULL));
+	// if posix thread model is defined, we recommand to use zcserver::Thread as shown in below
+	// zcserver::Thread::ptr generateFruits(new zcserver::Thread(&GameScreen::checkFruitSize, "FruitGenerator"));
+	
 	std::thread generateFruits(&GameScreen::checkFruitSize, this);
 	generateFruits.detach();
 }
@@ -35,6 +48,9 @@ void GameScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 
 void GameScreen::update(sf::Time delta)
 {
+	// s_mutex is recommanded
+    // zcserver::RWMutex::WriteLock lock(s_mutex);
+
 	snake_1.update(delta);
 
 	mutex_.lock();
@@ -67,6 +83,8 @@ void GameScreen::render(sf::RenderWindow &window)
 
 	for (auto fruit : fruit_)
 		fruit.render(window);
+	window.draw(sprite_);
+	window.draw(line_);
 }
 
 void GameScreen::generateFruit()

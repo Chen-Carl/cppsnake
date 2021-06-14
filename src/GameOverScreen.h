@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Screen.h"
+#include "zclog.h"
 
 namespace cppsnake
 {

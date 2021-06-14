@@ -10,7 +10,7 @@ using namespace cppsnake;
 
 MenuScreen::MenuScreen()
 {
-	font_.loadFromFile("Fonts/game_over.ttf");
+	font_.loadFromFile("/home/zoecarl/snake/Fonts/game_over.ttf");
 	text_.setFont(font_);
 	text_.setString(
 		"\n\n\n\n\n\n\n\n\nPress [SPACE] to play"
@@ -36,10 +36,16 @@ MenuScreen::MenuScreen()
 void MenuScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
 		// Game::Screen = std::make_shared<GameScreen>();
+		ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "<Space> is pressed, render Difficulty Screen";
 		Game::screen = std::make_shared<DifficultyScreen>();
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "window closed";
 		window.close();
+	}
 }
 
 void MenuScreen::update(sf::Time delta)

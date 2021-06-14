@@ -16,7 +16,7 @@ Brick::Brick(float width, float height, sf::Vector2f position, sf::Color color)
 	shape_.setOutlineColor(sf::Color::White);
 	shape_.setOutlineThickness(-1.f);
 	sf::Texture *texture = new sf::Texture();
-	texture->loadFromFile("./images/brick.jpg");
+	texture->loadFromFile("/home/zoecarl/snake/images/brick.jpg");
 	shape_.setTexture(texture);
 }
 

@@ -40,9 +40,9 @@ void Game::setBackground(const std::string &file)
 {
 	
 	sf::Texture bg;
-	sf::Texture bgLine;
+	// sf::Texture bgLine;
 	bg.loadFromFile(file);
-	bgLine.loadFromFile("./images/bgLine.png");
+	// bgLine.loadFromFile("./images/bgLine.png");
 	sf::RectangleShape background(sf::Vector2f(Game::Width + 300, Game::Height));
 	background.setTexture(&bg);
 
@@ -59,13 +59,14 @@ void Game::setBackground(const std::string &file)
 void Game::render()
 {
 	window_.clear();
-	setBackground("./images/background.jpg");
+	setBackground("/home/zoecarl/snake/images/background.jpg");
 	Game::screen->render(window_);
 	window_.display();
 }
 
 void Game::run()
 {
+	ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "A new game begins";
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 

@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Button.h"
 
-Button::Button(double x, double y, double xscale, double yscale) : isActive(true), PreBehRel(false)
+Button::Button(double x, double y, double xscale, double yscale, int index) : isActive(true), PreBehRel(false)
 {
-    setTexture("./images/default.jpg");
+    path = "/home/zoecarl/snake/images/Level" + std::to_string(index + 1) + ".png";
+    setTexture(path);
     setPosition(x, y);
     setScale(xscale, yscale);
 }
@@ -12,6 +13,11 @@ void Button::setTexture(std::string file)
 {
     img.loadFromFile(file);
     sprite.setTexture(img);
+}
+
+void Button::setFillColor(sf::Color color)
+{
+    sprite.setColor(color);
 }
 
 void Button::setPosition(int x, int y)
@@ -33,12 +39,14 @@ bool Button::onClick(sf::Event &e, sf::RenderWindow &window)
 {
     if (!isActive)
     {
-        setTexture("./images/press.jpg");
+        // press
+        setTexture(path);
+        setFillColor(sf::Color::White);
         return false;
     }
     bool flag = false;
     auto position = sf::Mouse::getPosition(window);
-    sf::FloatRect box = sprite.getGlobalBounds();       // get the reponse area
+    sf::FloatRect box = sprite.getGlobalBounds();       // get the response area
     if (position.x >= box.left && position.x <= (box.left + box.width) && position.y >= box.top && position.y <= (box.top + box.height))
     {
         if (e.type == sf::Event::MouseButtonReleased && PreBehRel)
@@ -51,17 +59,23 @@ bool Button::onClick(sf::Event &e, sf::RenderWindow &window)
 
         if (e.type == sf::Event::MouseButtonPressed)
         {
-            setTexture("./images/press.jpg");
+            // press
+            setTexture(path);
             PreBehRel = true;
+            setFillColor(sf::Color::White);
         }
         else
-            setTexture("./images/hover.jpg");
+        {
+            // hover
+            setTexture(path);
+            setFillColor(sf::Color::Blue);
+        }
     }
     else
-        setTexture("./images/default.jpg");
-    if (flag)
     {
-        std::cout << "true" << std::endl;
+        // default
+        setTexture(path);
+        setFillColor(sf::Color::White);
     }
     return flag;
 }
@@ -72,9 +86,9 @@ void Button::render(sf::RenderWindow &window)
     window.draw(sprite);
 }
 
-Key::Key(char ch, double x, double y) : Button(x, y, 0.6, 0.6)
+Key::Key(char ch, double x, double y, int index) : Button(x, y, 0.6, 0.6, index)
 {
-    if (!font.loadFromFile("./Fonts/game_over.ttf"))
+    if (!font.loadFromFile("/home/zoecarl/snake/Fonts/game_over.ttf"))
         std::cerr << "error: cannot load font file" << std::endl;
     text.setFont(font);
     text.setString(std::string(1, ch));

@@ -13,7 +13,7 @@ using namespace cppsnake;
 
 GameOverScreen::GameOverScreen(int winner, std::size_t score) : score_(score)
 {
-	font_.loadFromFile("Fonts/game_over.ttf");
+	font_.loadFromFile("/home/zoecarl/snake/Fonts/game_over.ttf");
 	text_.setFont(font_);	
 	if (winner == 0) 
 	{
@@ -40,9 +40,15 @@ GameOverScreen::GameOverScreen(int winner, std::size_t score) : score_(score)
 void GameOverScreen::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
 		Game::screen = std::make_shared<DifficultyScreen>();
+		ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Continue";
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
 		window.close();
+		ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Window closed";
+	}
 }
 
 void GameOverScreen::update(sf::Time delta)

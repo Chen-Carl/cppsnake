@@ -18,11 +18,11 @@ Snake::Snake(int index, sf::Color color) : hitSelf_(false), index_(index)
 	direction_ = Direction::Up;
 	initNodes(color);
 
-	pickupBuffer_.loadFromFile("Sounds/pickup.aiff");
+	pickupBuffer_.loadFromFile("/home/zoecarl/snake/Sounds/pickup.aiff");
 	pickupSound_.setBuffer(pickupBuffer_);
 	pickupSound_.setVolume(30);
 
-	dieBuffer_.loadFromFile("Sounds/die.wav");
+	dieBuffer_.loadFromFile("/home/zoecarl/snake/Sounds/die.wav");
 	dieSound_.setBuffer(dieBuffer_);
 	dieSound_.setVolume(50);
 }
@@ -40,24 +40,49 @@ void Snake::handleInput()
 	if (index_ == 0)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && direction_ != Direction::Down)
+		{
 			direction_ = Direction::Up;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 0" << " Direction changed: UP";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && direction_ != Direction::Up)
+		{
 			direction_ = Direction::Down;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 0" << " Direction changed: Down";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && direction_ != Direction::Right)
+		{
 			direction_ = Direction::Left;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 0" << " Direction changed: Left";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && direction_ != Direction::Left)
+		{
 			direction_ = Direction::Right;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 0" << " Direction changed: Right";
+		}
 	}
+
 	else if (index_ == 1)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && direction_ != Direction::Down)
+		{
 			direction_ = Direction::Up;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 1" << " Direction changed: Up";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && direction_ != Direction::Up)
+		{
 			direction_ = Direction::Down;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 1" << " Direction changed: Down";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && direction_ != Direction::Right)
+		{
 			direction_ = Direction::Left;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 1" << " Direction changed: Left";
+		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && direction_ != Direction::Left)
+		{
 			direction_ = Direction::Right;
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Snake 1" << " Direction changed: Right";
+		}
 	}
 }
 
@@ -80,8 +105,8 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
 
 	if (toRemove != fruits.end())
 	{
+		ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Get a fruit!";
 		pickupSound_.play();
-		fruits.erase(toRemove);
 
 		sf::Color color = toRemove->getFruitColor();
 		if (color == sf::Color::White || color == sf::Color::Yellow)
@@ -96,14 +121,13 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
 		}
 		else if (color == sf::Color::Red)
 		{
-			// shrink();
-			grow();
+			shrink();
+		}
+		else
+		{
 			grow();
 		}
-		// else
-		// {
-		// 	grow();
-		// }
+		fruits.erase(toRemove);
 	}
 }
 
@@ -114,6 +138,7 @@ void Snake::checkBarrierCollisions(Barrier& barrier)
 	{
 		if (headNode.getBounds().intersects(barrier.getBricks()[i].getBounds()))
 		{
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Barrier Collisions";
 			dieSound_.play();
 			sf::sleep(sf::seconds(dieBuffer_.getDuration().asSeconds()));
 			hitSelf_ = true;
@@ -168,6 +193,7 @@ void Snake::checkSelfCollisions()
 	{
 		if (headNode.getBounds().intersects(nodes_[i].getBounds()))
 		{
+			ZCSERVER_LOG_INFO(ZCSERVER_LOG_ROOT()) << "Self Collisions";
 			dieSound_.play();
 			sf::sleep(sf::seconds(dieBuffer_.getDuration().asSeconds()));
 			hitSelf_ = true;
